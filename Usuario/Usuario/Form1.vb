@@ -27,12 +27,12 @@ Public Class Form1
             txtCorreo.Focus()
             txtCorreo.SelectAll()
         Else
-            insertarUsuaurio()
+            insertarUsuario()
             'MessageBox.Show("Correo valido", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Conexion.conexion.Close()
         End If
     End Sub
-    Private Sub insertarUsuaurio()
+    Private Sub insertarUsuario()
         Dim ID As Integer
         Dim nombre, apellido, username, psw, correo, rol, estado As String
         ID = txtCod.Text
@@ -44,7 +44,7 @@ Public Class Form1
         estado = "activo"
         rol = cmbRol.Text
         Try
-            If Conexion.ingresarUsuario(ID, nombre, apellido, username, psw, rol, estado, correo) Then
+            If Conexion.ingresarUsuario(ID, convertMayus(nombre), convertMayus(apellido), username, psw, rol, estado, LCase(correo)) Then
                 MessageBox.Show("Guardado", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Llenar()
             Else
@@ -56,9 +56,9 @@ Public Class Form1
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        eliminarUsuaurio()
+        eliminarUsuario()
     End Sub
-    Private Sub eliminarUsuaurio()
+    Private Sub eliminarUsuario()
         Dim ID As Integer
         Dim rol As String
         ID = txtCod.Text
@@ -128,8 +128,7 @@ Public Class Form1
     Private Sub txtBuscar_TextChanged(sender As Object, e As EventArgs) Handles txtBuscar.TextChanged
         buscar()
     End Sub
-    Function Inicial(ByVal cadena As String) As String
-        Dim inicialMayuscula As String = StrConv(cadena, VbStrConv.ProperCase)
-        Return cadena
+    Function convertMayus(ByVal text As String)
+        Return StrConv(text, VbStrConv.ProperCase)
     End Function
 End Class
