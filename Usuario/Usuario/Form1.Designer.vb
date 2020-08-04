@@ -22,6 +22,7 @@ Partial Class Form1
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtCod = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -44,8 +45,14 @@ Partial Class Form1
         Me.txtBuscar = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.ErrorProvider2 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.ErrorProvider3 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataUsuario, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -95,7 +102,7 @@ Partial Class Form1
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(257, 222)
+        Me.btnModificar.Location = New System.Drawing.Point(248, 261)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(75, 23)
         Me.btnModificar.TabIndex = 16
@@ -104,7 +111,7 @@ Partial Class Form1
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(257, 264)
+        Me.btnEliminar.Location = New System.Drawing.Point(248, 303)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(75, 23)
         Me.btnEliminar.TabIndex = 15
@@ -113,7 +120,7 @@ Partial Class Form1
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(257, 303)
+        Me.btnGuardar.Location = New System.Drawing.Point(248, 216)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 23)
         Me.btnGuardar.TabIndex = 14
@@ -266,6 +273,18 @@ Partial Class Form1
         Me.Label8.TabIndex = 17
         Me.Label8.Text = "Buscar:"
         '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
+        '
+        'ErrorProvider2
+        '
+        Me.ErrorProvider2.ContainerControl = Me
+        '
+        'ErrorProvider3
+        '
+        Me.ErrorProvider3.ContainerControl = Me
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -281,6 +300,9 @@ Partial Class Form1
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.DataUsuario, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -308,4 +330,7 @@ Partial Class Form1
     Friend WithEvents txtBuscar As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents ErrorProvider1 As ErrorProvider
+    Friend WithEvents ErrorProvider2 As ErrorProvider
+    Friend WithEvents ErrorProvider3 As ErrorProvider
 End Class

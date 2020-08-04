@@ -1,8 +1,5 @@
 ﻿Public Class Login
     Dim conexion As New Conexion
-    Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
     Private Sub ingresarMenu()
         Dim userName, psw As String
         userName = txtUsuario.text

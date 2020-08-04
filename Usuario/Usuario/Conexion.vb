@@ -147,5 +147,70 @@ Public Class Conexion
             conexion.Close()
         End Try
     End Function
+    Public Function consultarPSW(correo As String)
+        Try
+            conexion.Open()
+            cmd = New SqlCommand("buscarUsuarioPorCorreo", conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@correo", correo)
+            If cmd.ExecuteNonQuery <> 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            conexion.Close()
+        End Try
+    End Function
 
+    Public Function consultarProducto(idCodigo As Integer) As DataTable
+        Try
+            conexion.Open()
+            Dim cmb As New SqlCommand("buscarProducto", conexion)
+            cmb.CommandType = CommandType.StoredProcedure
+            cmb.Parameters.AddWithValue("@idProducto", idCodigo)
+            If cmb.ExecuteNonQuery <> 0 Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmb)
+                da.Fill(dt)
+                Return dt
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        Finally
+            conexion.Close()
+        End Try
+    End Function
+    Public Function insertarProducto(idUsuario As Integer, nombre As String, stock As Integer, precioCompra As Double,
+                                    precioVenta As Double, fechaVenc As String, stockMinimo As Integer, impt As Double)
+        Try
+            conexion.Open()
+            cmd = New SqlCommand("insertarProducto", conexion)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@idProducto", idUsuario)
+            cmd.Parameters.AddWithValue("@nombre", nombre)
+            cmd.Parameters.AddWithValue("@stock", stock)
+            cmd.Parameters.AddWithValue("@precioCompra", precioCompra)
+            cmd.Parameters.AddWithValue("@precioVenta", precioVenta)
+            cmd.Parameters.AddWithValue("@fechaVencimiento", fechaVenc)
+            cmd.Parameters.AddWithValue("@stockMinimo", stockMinimo)
+            cmd.Parameters.AddWithValue("@impuesto", impt)
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            conexion.Close()
+        End Try
+    End Function
 End Class

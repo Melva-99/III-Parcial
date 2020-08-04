@@ -42,6 +42,7 @@ Partial Class Login
         '
         'txtUsuario
         '
+        Me.txtUsuario.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.txtUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtUsuario.Location = New System.Drawing.Point(108, 70)
         Me.txtUsuario.Multiline = True
@@ -69,10 +70,12 @@ Partial Class Login
         '
         'txtPsw
         '
+        Me.txtPsw.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.txtPsw.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtPsw.Location = New System.Drawing.Point(108, 135)
         Me.txtPsw.Multiline = True
         Me.txtPsw.Name = "txtPsw"
+        Me.txtPsw.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPsw.Size = New System.Drawing.Size(201, 18)
         Me.txtPsw.TabIndex = 23
         '
@@ -98,6 +101,7 @@ Partial Class Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.ClientSize = New System.Drawing.Size(362, 288)
         Me.Controls.Add(Me.btnIniciar)
         Me.Controls.Add(Me.Label1)

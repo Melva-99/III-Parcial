@@ -1,4 +1,5 @@
-﻿Imports System.Text.RegularExpressions
+﻿Imports System.ComponentModel
+Imports System.Text.RegularExpressions
 Public Class Form1
     Dim Conexion As New Conexion
     Dim dt As New DataTable
@@ -22,15 +23,20 @@ Public Class Form1
         txtCorreo.Clear()
     End Sub
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        If validarCorreo(LCase(txtCorreo.Text)) = False Then
-            MessageBox.Show("Correo invalido, *username@midominio.com*", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            txtCorreo.Focus()
-            txtCorreo.SelectAll()
-        Else
-            insertarUsuario()
-            'MessageBox.Show("Correo valido", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Conexion.conexion.Close()
-        End If
+        Try
+            If Me.ValidateChildren And txtCod.Text <> String.Empty And txtNombre.Text <> String.Empty And txtApellido.Text <> String.Empty And txtUsuario.Text <> String.Empty And txtContra.Text <> String.Empty And cmbRol.SelectedItem <> String.Empty Then
+                If validarCorreo(LCase(txtCorreo.Text)) = False Then
+                    MessageBox.Show("Correo invalido, *username@midominio.com*", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    txtCorreo.Focus()
+                    txtCorreo.SelectAll()
+                Else
+                    insertarUsuario()
+                    Conexion.conexion.Close()
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
     Private Sub insertarUsuario()
         Dim ID As Integer
@@ -131,4 +137,64 @@ Public Class Form1
     Function convertMayus(ByVal text As String)
         Return StrConv(text, VbStrConv.ProperCase)
     End Function
+
+    Private Sub txtCod_Validating(sender As Object, e As CancelEventArgs) Handles txtCod.Validating
+        If DirectCast(sender, TextBox).Text.Length > 0 Then
+            Me.ErrorProvider1.SetError(sender, "")
+        Else
+            Me.ErrorProvider1.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
+
+    Private Sub txtNombre_Validating(sender As Object, e As CancelEventArgs) Handles txtNombre.Validating
+        If DirectCast(sender, TextBox).Text.Length > 0 Then
+            Me.ErrorProvider1.SetError(sender, "")
+        Else
+            Me.ErrorProvider1.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
+
+    Private Sub txtApellido_Validating(sender As Object, e As CancelEventArgs) Handles txtApellido.Validating
+        If DirectCast(sender, TextBox).Text.Length > 0 Then
+            Me.ErrorProvider2.SetError(sender, "")
+        Else
+            Me.ErrorProvider2.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
+
+    Private Sub txtUsuario_Validating(sender As Object, e As CancelEventArgs) Handles txtUsuario.Validating
+        If DirectCast(sender, TextBox).Text.Length > 0 Then
+            Me.ErrorProvider2.SetError(sender, "")
+        Else
+            Me.ErrorProvider2.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
+
+    Private Sub txtContra_Validating(sender As Object, e As CancelEventArgs) Handles txtContra.Validating
+        If DirectCast(sender, TextBox).Text.Length > 0 Then
+            Me.ErrorProvider3.SetError(sender, "")
+        Else
+            Me.ErrorProvider3.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
+
+    Private Sub txtCorreo_Validating(sender As Object, e As CancelEventArgs) Handles txtCorreo.Validating
+        If DirectCast(sender, TextBox).Text.Length > 0 Then
+            Me.ErrorProvider3.SetError(sender, "")
+        Else
+            Me.ErrorProvider3.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
+
+    Private Sub cmbRol_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRol.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cmbRol_Validating(sender As Object, e As CancelEventArgs) Handles cmbRol.Validating
+        If cmbRol.SelectedItem <> "" Then
+            Me.ErrorProvider3.SetError(sender, "")
+        Else
+            Me.ErrorProvider3.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
 End Class
